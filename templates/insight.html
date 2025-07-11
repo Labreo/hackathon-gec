@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EcoConnect - Insights Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0fdf4;
+      color: #2e7d32;
+    }
+    header, section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #1b5e20;
+      text-align: center;
+    }
+    .metrics {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 30px 0;
+    }
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 10px;
+      flex: 1 1 250px;
+      text-align: center;
+    }
+    .card img {
+      width: 40px;
+      margin-bottom: 10px;
+    }
+    ul, ol {
+      padding-left: 20px;
+    }
+    a {
+      color: #1b5e20;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .img-banner {
+      width: 100%;
+      height: auto;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .section-img {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>EcoConnect Insight Dashboard</h1>
+    <p>Track your impact and explore ways to live more sustainably 🌎</p>
+  </header>
+
+  <section>
+    <h2>Your Impact Stats</h2>
+    <div class="metrics">
+      <div class="card">
+        <img src="/static/img/pickup.png" alt="Pickups">
+        <h3>Total Pickups</h3>
+        <p>135</p>
+      </div>
+      <div class="card">
+        <img src="/static/img/weight.png" alt="Weight">
+        <h3>Total Weight Recycled</h3>
+        <p>820.4 kg</p>
+      </div>
+      <div class="card">
+        <img src="/static/img/pending.png" alt="Pending">
+        <h3>Pending Pickups</h3>
+        <p>6</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Recycling Guides</h2>
+    <img class="section-img" src="/static/img/recycle-guide.jpg" alt="Recycling Guide">
+    <ul>
+      <li><a href="https://www.epa.gov/recycle/electronics-donation-and-recycling" target="_blank">EPA Guide to Electronics Recycling</a></li>
+      <li><a href="https://www.greenpeace.org/international/story/46598/e-waste-the-toxic-legacy-of-our-digital-age/" target="_blank">Greenpeace E-Waste Facts</a></li>
+      <li><a href="https://www.theworldcounts.com/challenges/planet-earth/waste/electronic-waste/story" target="_blank">World Counts – E-Waste Stats</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Sustainable Living Tips</h2>
+    <img class="section-img" src="/static/img/sustainable.jpg" alt="Sustainable Living">
+    <p>Start your sustainability journey with simple changes. These tips help reduce waste, save energy, and live in harmony with nature.</p>
+    <ol>
+      <li>Reduce single-use plastics by switching to reusable alternatives.</li>
+      <li>Buy local produce to cut down transportation emissions.</li>
+      <li>Compost organic waste to reduce landfill load.</li>
+      <li>Opt for energy-efficient appliances and lightbulbs.</li>
+      <li>Take shorter showers to conserve water.</li>
+      <li>Walk, cycle, or use public transport whenever possible.</li>
+      <li>Practice mindful consumption—buy less, choose quality.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Educational Videos for Kids 🎥</h2>
+    <img class="section-img" src="/static/img/education.jpg" alt="Kids Education">
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=dqTTojTija8" target="_blank">What is E-Waste? (SciShow Kids)</a></li>
+      <li><a href="https://climatekids.nasa.gov/" target="_blank">NASA Climate Kids – Fun Learning Portal</a></li>
+      <li><a href="https://www.youtube.com/watch?v=eym10GGidQU" target="_blank">The Story of Electronics (Short Film)</a></li>
+      <li><a href="https://www.youtube.com/watch?v=7JxfgId3XTs" target="_blank">Learn about Recycling & Pollution (Peekaboo Kidz)</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>EcoTech Innovations 🔬</h2>
+    <img class="section-img" src="/static/img/ecotech.jpg" alt="EcoTech Innovations">
+    <p>
+      EcoTech Innovations is a global initiative focused on solving climate and e-waste challenges through smart technology. 
+      Our R&D division partners with global universities, recycling companies, and green startups to develop:
+    </p>
+    <ul>
+      <li>AI-driven e-waste sorting systems</li>
+      <li>Eco-drones for waste collection in hard-to-reach areas</li>
+      <li>IOT-based tracking for recycled materials</li>
+      <li>Upcycling platforms for electronic parts</li>
+      <li>Low-energy, modular recycling plants</li>
+    </ul>
+    <p>
+      Learn more at <a href="https://www.ecotech.org" target="_blank">www.ecotech.org</a> and explore ongoing innovations in green tech at 
+      <a href="https://climate.nasa.gov/solutions/" target="_blank">NASA Climate Solutions</a> and 
+      <a href="https://www.unep.org/resources/report/global-e-waste-monitor-2020" target="_blank">UN Global E-Waste Monitor</a>.
+    </p>
+  </section>
+
+  <footer style="text-align:center; padding: 20px; background-color: #c8e6c9;">
+    <p>📧 contact@ecoconnect.org | ☎️ +91-9422181844</p>
+    <p>&copy; 2025 EcoConnect. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
