@@ -99,7 +99,17 @@
 <body>
   <div class="container">
     <h2>Create your account</h2>
-    
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message" style="background-color: #ffe0e0; color: #b00020; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
     <form method="POST" action="/signup">
       <div class="input-row">
         <label for="fullname">Full Name</label>
