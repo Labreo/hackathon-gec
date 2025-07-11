@@ -140,6 +140,12 @@ def collector_dashboard():
     # Load pickups and show based on proximity
     return render_template('collector_dashboard.html')
 
+
+@app.route('/collector-signup')
+def collector_dashboard():
+    # Load pickups and show based on proximity
+    return render_template('collector_signup.html')
+
 @app.route('/logout')
 def logout():
     session.clear()

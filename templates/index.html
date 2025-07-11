@@ -139,8 +139,8 @@
       <form method="get" action="{{ url_for('signup') }}">
         <button class="btn" type="submit" formaction="{{ url_for('signup', role='user') }}">Sign up as User</button>
       </form>
-      <form method="get" action="{{ url_for('signup') }}">
-        <button class="btn" type="submit" formaction="{{ url_for('signup', role='collector') }}">Sign up as Collector</button>
+      <form method="get" action="{{ url_for('collector_signup') }}">
+        <button class="btn" type="submit" formaction="{{ url_for('collector_signup', role='collector') }}">Sign up as Collector</button>
       </form>
     </div>
   </section>

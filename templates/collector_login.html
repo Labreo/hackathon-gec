@@ -105,7 +105,7 @@
       {% endif %}
     {% endwith %}
 
-    <form method="POST" action="{{ url_for('login') }}">
+    <form method="POST" action="{{ url_for('collector_dashboard') }}">
       <div class="input-field">
         <label for="username">Username or Email</label>
         <input type="text" name="username" id="username" placeholder="Enter your email or username" required />
@@ -120,7 +120,7 @@
     </form>
 
     <div class="footer">
-      New here? <a href="{{ url_for('signup') }}">Create an account</a>
+      New here? <a href="{{ url_for('collector_signup') }}">Create an account</a>
     </div>
   </div>
 </body>
