@@ -95,7 +95,17 @@
   <div class="container">
     <h2>Welcome back</h2>
 
-    <form method="POST" action="/login">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flash-messages">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('login') }}">
       <div class="input-field">
         <label for="username">Username or Email</label>
         <input type="text" name="username" id="username" placeholder="Enter your email or username" required />
