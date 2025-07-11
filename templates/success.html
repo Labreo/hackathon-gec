@@ -70,9 +70,9 @@
 
   <div class="container">
     <h1>✅ Pickup Scheduled Successfully!</h1>
-    <p>Thank you for helping reduce electronic waste. 🌍<br>
+    <p>Thank you for helping reduce electronic waste {{username}} 🌍<br>
     Our team will reach out to confirm the pickup shortly.</p>
-    <a href="/templates/home.html" class="btn">Back to Home</a>
+    <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
   </div>
 </body>
 </html>
