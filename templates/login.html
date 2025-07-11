@@ -18,25 +18,35 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 20px;
     }
     .container {
       background-color: #f0fdf0;
       padding: 40px;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 90%;
+      width: 100%;
       max-width: 380px;
     }
     h2 {
       margin-top: 0;
       font-weight: 500;
       color: #202124;
+      text-align: center;
+    }
+    .input-field {
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #202124;
+      font-size: 14px;
     }
     input[type="text"],
     input[type="password"] {
       width: 100%;
       padding: 12px;
-      margin-top: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
       background-color: #f1f3f4;
@@ -73,48 +83,35 @@
     .footer a:hover {
       text-decoration: underline;
     }
+    .flash-messages {
+      color: red;
+      margin-top: 15px;
+      list-style-type: none;
+      padding-left: 0;
+    }
   </style>
 </head>
 <body>
-<<<<<<< Updated upstream
-<div class="container">
-  <h2>Welcome back</h2>
-
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul style="color: red;">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
-  <!-- Add form with method="POST" -->
-  <form method="POST" action="/login">
-    <div class="input-field">
-      <input type="text" name="username" placeholder="Enter your email or username" required />
-=======
   <div class="container">
     <h2>Welcome back</h2>
-    <input type="text" placeholder="Enter your email or username" />
-    <input type="password" placeholder="Enter your password" />
-    <button class="btn">Continue</button>
+
+    <form method="POST" action="/login">
+      <div class="input-field">
+        <label for="username">Username or Email</label>
+        <input type="text" name="username" id="username" placeholder="Enter your email or username" required />
+      </div>
+
+      <div class="input-field">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password" required />
+      </div>
+
+      <button class="btn" type="submit">Continue</button>
+    </form>
+
     <div class="footer">
-      New here? <a href="signup.html">Create an account</a>
->>>>>>> Stashed changes
+      New here? <a href="{{ url_for('signup') }}">Create an account</a>
     </div>
-
-    <div class="input-field">
-      <input type="password" name="password" placeholder="Enter your password" required />
-    </div>
-
-    <button class="btn" type="submit">Continue</button>
-  </form>
-
-  <div class="footer">
-    New here? <a href="{{ url_for('signup') }}">Create an account</a>
   </div>
-</div>
 </body>
 </html>
