@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, session
+import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for sessions
@@ -9,7 +10,20 @@ def index():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']  
+        # Insert into database
+        conn = sqlite3.connect('pickups.db')
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+        conn.commit()
+        conn.close()
+
+        return redirect('/login')  
+
     return render_template('signup.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
