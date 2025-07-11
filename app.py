@@ -8,6 +8,8 @@ app.secret_key = 'your_secret_key'  # Needed for sessions
 def index():
     return render_template('index.html')
 
+from flask import flash
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -18,16 +20,20 @@ def signup():
         username = request.form['username']
         password = request.form['password']
 
-        conn = sqlite3.connect('pickups.db')
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO users (fullname, address, age, sex, username, password)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ''', (fullname, address, age, sex, username, password))
-        conn.commit()
-        conn.close()
+        try:
+            conn = sqlite3.connect('pickups.db')
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO users (fullname, address, age, sex, username, password)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (fullname, address, age, sex, username, password))
+            conn.commit()
+            conn.close()
+            return redirect('/login')
 
-        return redirect('/login')
+        except sqlite3.IntegrityError:
+            flash("Username or email already exists. Please choose another.")
+            return redirect('/signup')
 
     return render_template('signup.html')
 
@@ -52,14 +58,37 @@ def login():
 
     return render_template('login.html')
 
-
 @app.route('/home')
 def home():
-    if 'username' in session:
-        username = session['username']
-        return render_template('home.html', username=username)
-    else:
-        return redirect('/login')  # user not logged in
+    if 'username' not in session:
+        return redirect('/login')
+
+    conn = sqlite3.connect('pickups.db')
+    conn.row_factory = sqlite3.Row  # enables pickup.equipment-style access
+    cursor = conn.cursor()
+
+    # Get user info
+    cursor.execute("SELECT id, fullname, username FROM users WHERE username = ?", (session['username'],))
+    user = cursor.fetchone()
+
+    if not user:
+        conn.close()
+        return redirect('/login')
+    user_id = user['id']
+    fullname = user['fullname']
+    email = user['username']
+
+    # Get pickups
+    cursor.execute('''
+        SELECT equipment, weight, dimensions, address, pickup_time, status
+        FROM pickups
+        WHERE user_id = ?
+        ORDER BY timestamp DESC
+    ''', (user_id,))
+    pickups = cursor.fetchall()
+    conn.close()
+
+    return render_template('home.html', name=fullname, email=email, pickups=pickups)
 
 
 @app.route('/request-pickup', methods=['GET', 'POST'])
