@@ -55,7 +55,12 @@ def login():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    if 'username' in session:
+        username = session['username']
+        return render_template('home.html', username=username)
+    else:
+        return redirect('/login')  # user not logged in
+
 
 @app.route('/request-pickup', methods=['GET', 'POST'])
 def request_pickup():
@@ -63,6 +68,10 @@ def request_pickup():
         # Save pickup data (name, address, waste_type)
         return redirect('/success')
     return render_template('request_pickup.html')
+
+@app.route('/profile', methods=['GET'])
+def profile():
+    return render_template('profile.html')
 
 @app.route('/success')
 def success():
