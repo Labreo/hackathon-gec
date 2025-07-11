@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>EcoConnect - Home</title>
+  <title>EcoConnect - Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      font-family: 'Poppins', sans-serif;
       background-color: #f4fdf4;
     }
 
@@ -27,50 +27,137 @@
       color: #2e7d32;
     }
 
-    .profile-icon {
-      font-size: 20px;
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logout-btn {
+      font-size: 14px;
+      text-decoration: none;
       color: #2e7d32;
-      cursor: pointer;
+      border: 1px solid #2e7d32;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .logout-btn:hover {
+      background-color: #2e7d32;
+      color: white;
     }
 
     .container {
-      padding: 40px 20px;
-      text-align: center;
+      max-width: 1000px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .container h1 {
-      font-size: 28px;
+    .container h2 {
       color: #1b5e20;
+      margin-bottom: 10px;
+    }
+
+    .welcome {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
     }
 
     .btn {
       display: inline-block;
-      margin-top: 30px;
-      padding: 14px 28px;
+      margin-bottom: 30px;
+      padding: 12px 24px;
       background-color: #2e7d32;
       color: white;
       text-decoration: none;
       border-radius: 6px;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .btn:hover {
       background-color: #1b5e20;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background-color: #c8e6c9;
+      color: #1b5e20;
+      display: inline-block;
+    }
+
+    .no-data {
+      color: #777;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">EcoConnect</div>
-    <div class="profile-icon">
-      <i class="fas fa-user-circle"></i>
+    <div class="top-right">
+      <a href="/logout" class="logout-btn">Logout</a>
     </div>
   </header>
 
   <div class="container">
-    <h1>Welcome back to EcoConnect {{ username }}!</h1>
-    <p>Thank you for helping reduce electronic waste 🌿</p>
-    <a href="{{ url_for('request_pickup') }}" class="btn">Schedule a Pickup</a>
+    <h2>Welcome, {{ name }} 👋</h2>
+    <p class="welcome">Email: {{ email }}</p>
+
+    <a href="{{ url_for('request-pickup') }}" class="btn">📦 Schedule a Pickup</a>
+
+    <h3>Your Pickup Requests</h3>
+    {% if pickups %}
+    <table>
+      <thead>
+        <tr>
+          <th>Equipment</th>
+          <th>Weight (kg)</th>
+          <th>Dimensions</th>
+          <th>Address</th>
+          <th>Pickup Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pickup in pickups %}
+        <tr>
+          <td>{{ pickup.equipment }}</td>
+          <td>{{ pickup.weight }}</td>
+          <td>{{ pickup.dimensions }}</td>
+          <td>{{ pickup.address }}</td>
+          <td>{{ pickup.pickup_time }}</td>
+          <td><span class="status">{{ pickup.status }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p class="no-data">You have no pickup requests yet.</p>
+    {% endif %}
   </div>
 </body>
 </html>
