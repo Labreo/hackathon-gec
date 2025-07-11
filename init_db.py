@@ -8,6 +8,10 @@ cursor = conn.cursor()
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT NOT NULL,
+    address TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    sex TEXT NOT NULL,
     username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL
 )
@@ -16,14 +20,19 @@ CREATE TABLE IF NOT EXISTS users (
 #Create pickup table
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS pickups (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
+    equipment TEXT NOT NULL,
+    weight REAL NOT NULL,
+    dimensions TEXT NOT NULL,
     address TEXT NOT NULL,
-    waste_type TEXT NOT NULL,
-    status TEXT DEFAULT 'pending', 
+    pickup_time TEXT NOT NULL,
+    status TEXT DEFAULT 'pending',
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 )
 ''')
+
 
 
 conn.commit()

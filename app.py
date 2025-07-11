@@ -11,16 +11,23 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        fullname = request.form['fullname']
+        address = request.form['address']
+        age = request.form['age']
+        sex = request.form['sex']
         username = request.form['username']
-        password = request.form['password']  
-        # Insert into database
+        password = request.form['password']
+
         conn = sqlite3.connect('pickups.db')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+        cursor.execute('''
+            INSERT INTO users (fullname, address, age, sex, username, password)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (fullname, address, age, sex, username, password))
         conn.commit()
         conn.close()
 
-        return redirect('/login')  
+        return redirect('/login')
 
     return render_template('signup.html')
 
@@ -48,14 +55,48 @@ def login():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    if 'username' in session:
+        username = session['username']
+        return render_template('home.html', username=username)
+    else:
+        return redirect('/login')  # user not logged in
+
 
 @app.route('/request-pickup', methods=['GET', 'POST'])
 def request_pickup():
+    if 'username' not in session:
+        return redirect('/login')
+
     if request.method == 'POST':
-        # Save pickup data (name, address, waste_type)
+        equipment = request.form['equipment']
+        weight = request.form['weight']
+        dimensions = request.form['dimensions']
+        address = request.form['address']
+        pickup_time = request.form['pickup_time']
+
+        # Get user ID from username
+        conn = sqlite3.connect('pickups.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM users WHERE username = ?", (session['username'],))
+        user = cursor.fetchone()
+
+        if user:
+            user_id = user[0]
+            cursor.execute('''
+                INSERT INTO pickups (user_id, equipment, weight, dimensions, address, pickup_time)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (user_id, equipment, weight, dimensions, address, pickup_time))
+            conn.commit()
+        
+        conn.close()
         return redirect('/success')
+
     return render_template('request_pickup.html')
+
+
+@app.route('/profile', methods=['GET'])
+def profile():
+    return render_template('profile.html')
 
 @app.route('/success')
 def success():
