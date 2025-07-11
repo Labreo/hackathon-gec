@@ -1,20 +1,82 @@
-# hackathon-gec
-User:login,home screen,schedule a pickup(details),store in database.Pickup login.Get information.according to proxmity.Pickup(Possible implementation of google maps api) 
-ecoconnect/
+# ♻️ EcoConnect — Hackathon-Coding Club
+
+EcoConnect is a Flask-based web application designed during a 24-hour hackathon to connect users with **local farms** and enable **waste collectors** to pick up waste — especially e-waste — directly from users' doorsteps. The goal is to simplify sustainable disposal while promoting local farming initiatives.
+
+---
+
+## 🌐 Features
+
+### 👤 User Module
+- ✅ User Signup & Login (with session tracking)
+- 🏠 User Dashboard (`/home`)
+- 📦 Schedule Pickup: Equipment type, weight, dimensions, address & time
+- 🧾 View Previous Pickup Requests
+
+### 🚛 Collector Module
+- 🔐 Collector Signup & Login
+- 📍 Access pickup requests based on proximity
+- 📊 Dashboard to view and manage pickup jobs (planned: Google Maps API integration)
+
+---
+
+## 🗂️ Project Structure
+
+├── README.md
 ├── app.py
+├── init_db.py
+├── pickups.db
 ├── requirements.txt
-├── /templates/
-│   ├── index.html             # Landing page
-│   ├── signup.html            # User registration
-│   ├── login.html             # User login
-│   ├── home.html              # After login dashboard
-│   ├── request_pickup.html    # Form to schedule pickup
-│   ├── success.html           # After form submission
-│   ├── collector_login.html   # Separate login for pickup agents
-│   ├── collector_dashboard.html  # View pickup requests
-├── /static/
-│   ├── style.css              # CSS styles
-│   └── map.js (optional)      # JS for maps integration
-└── /data/
-    └── pickups.db (SQLite) or JSON
-This is the project scehmca
+├── static
+│   ├── img
+│   │   ├── book.png
+│   │   ├── collect.png
+│   │   └── recycle.png
+│   ├── map.js
+│   └── style.css
+└── templates
+    ├── collector_dashboard.html
+    ├── collector_login.html
+    ├── collector_signup.html
+    ├── home.html
+    ├── index.html
+    ├── login.html
+    ├── request_pickup.html
+    ├── signup.html
+    └── success.html
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend**: Python, Flask, SQLite3
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Database**: SQLite
+- **Extra**: Google Maps API , Session Handling, Flash Messaging
+
+---
+
+## ⚙️ Setup Instructions
+
+1. **Clone this repo**
+   ```bash
+   git clone https://github.com/yourusername/hackathon-gec.git
+   cd hackathon-gec
+
+2. **Create virtual environment & install requirements**
+   python -m venv venv
+   source venv/bin/activate  # or venv\Scripts\activate on Windows
+   pip install -r requirements.txt
+
+3. **Initialize the database**
+   python init_db.py
+
+4. **Initialize the database**
+   python init_db.py
+
+5. **Run the app**
+   flask run
+
+6. **Open in browser**
+   Visit http://localhost:5000
+   
+ 
