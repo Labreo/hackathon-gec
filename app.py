@@ -198,7 +198,7 @@ def mark_collected(pickup_id):
 
 
 
-@app.route('/collector-signup')
+@app.route('/collector-signup', methods=['GET', 'POST'])
 def collector_signup():
     if request.method == 'POST':
         fullname = request.form['fullname']
@@ -217,7 +217,7 @@ def collector_signup():
             ''', (fullname, address, age, sex, username, password))
             conn.commit()
             conn.close()
-            return redirect('collector-login')
+            return redirect('/collector-login')
 
         except sqlite3.IntegrityError:
             flash("Username or email already exists. Please choose another.")
