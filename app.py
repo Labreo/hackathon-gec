@@ -133,6 +133,22 @@ def success():
 
 @app.route('/collector-login', methods=['GET', 'POST'])
 def collector_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']  
+        conn = sqlite3.connect('pickups.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            session['username'] = username
+            return redirect('/collector-dashboard')
+        else:
+            flash('Invalid username or password')
+            return redirect('/collector-login')
+
     return render_template('collector_login.html')
 
 @app.route('/collector-dashboard')
@@ -142,8 +158,30 @@ def collector_dashboard():
 
 
 @app.route('/collector-signup')
-def collector_dashboard():
-    # Load pickups and show based on proximity
+def collector_signup():
+    if request.method == 'POST':
+        fullname = request.form['fullname']
+        address = request.form['address']
+        age = request.form['age']
+        sex = request.form['sex']
+        username = request.form['username']
+        password = request.form['password']
+
+        try:
+            conn = sqlite3.connect('pickups.db')
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO users (fullname, address, age, sex, username, password)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (fullname, address, age, sex, username, password))
+            conn.commit()
+            conn.close()
+            return redirect('collector-login')
+
+        except sqlite3.IntegrityError:
+            flash("Username or email already exists. Please choose another.")
+            return redirect('/collector-signup')
+
     return render_template('collector_signup.html')
 
 @app.route('/logout')
