@@ -64,10 +64,35 @@ def home():
 
 @app.route('/request-pickup', methods=['GET', 'POST'])
 def request_pickup():
+    if 'username' not in session:
+        return redirect('/login')
+
     if request.method == 'POST':
-        # Save pickup data (name, address, waste_type)
+        equipment = request.form['equipment']
+        weight = request.form['weight']
+        dimensions = request.form['dimensions']
+        address = request.form['address']
+        pickup_time = request.form['pickup_time']
+
+        # Get user ID from username
+        conn = sqlite3.connect('pickups.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM users WHERE username = ?", (session['username'],))
+        user = cursor.fetchone()
+
+        if user:
+            user_id = user[0]
+            cursor.execute('''
+                INSERT INTO pickups (user_id, equipment, weight, dimensions, address, pickup_time)
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (user_id, equipment, weight, dimensions, address, pickup_time))
+            conn.commit()
+        
+        conn.close()
         return redirect('/success')
+
     return render_template('request_pickup.html')
+
 
 @app.route('/profile', methods=['GET'])
 def profile():
