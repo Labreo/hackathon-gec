@@ -135,10 +135,10 @@
       <thead>
         <tr>
           <th>Equipment</th>
-          <th>Weight (kg)</th>
+          <th>Weight</th>
           <th>Dimensions</th>
           <th>Address</th>
-          <th>Pickup Time</th>
+          <th>Time</th>
           <th>Status</th>
         </tr>
       </thead>
@@ -146,11 +146,26 @@
         {% for pickup in pickups %}
         <tr>
           <td>{{ pickup.equipment }}</td>
-          <td>{{ pickup.weight }}</td>
+          <td>{{ pickup.weight }} kg</td>
           <td>{{ pickup.dimensions }}</td>
-          <td>{{ pickup.address }}</td>
+          <td>
+            {{ pickup.address }}<br>
+            <a href="https://www.google.com/maps/search/?api=1&query={{ pickup.address | urlencode }}" target="_blank">📍 View Map</a>
+          </td>
           <td>{{ pickup.pickup_time }}</td>
-          <td><span class="status">{{ pickup.status }}</span></td>
+          <td>
+            {% set bg_color = (
+    '#ffeb3b' if pickup.status == 'pending' 
+    else '#a5d6a7' if pickup.status == 'collected' 
+    else '#e0e0e0'
+) %}
+
+<span style="padding: 4px 8px;border-radius: 4px;">
+  {{ pickup.status.capitalize() }}
+</span>
+
+
+          </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -160,4 +175,5 @@
     {% endif %}
   </div>
 </body>
+
 </html>

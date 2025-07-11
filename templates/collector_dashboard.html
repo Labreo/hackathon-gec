@@ -93,52 +93,54 @@
     }
   </style>
 </head>
+<!-- collector_dashboard.html -->
 <body>
   <header>
     <div class="logo">EcoConnect</div>
     <div class="top-right">
-      <a href="/logout" class="logout-btn">Logout</a>
+      <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
     </div>
   </header>
 
   <div class="container">
-    <h2>Pending Pickup Requests</h2>
+    <h2>📦 Pending Pickup Requests</h2>
+
     {% if pickups %}
     <table>
       <thead>
         <tr>
           <th>Equipment</th>
-          <th>Weight (kg)</th>
+          <th>Weight</th>
           <th>Dimensions</th>
           <th>Address</th>
-          <th>Preferred Time</th>
-          <th>Status</th>
+          <th>Time</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         {% for pickup in pickups %}
         <tr>
           <td>{{ pickup.equipment }}</td>
-          <td>{{ pickup.weight }}</td>
+          <td>{{ pickup.weight }} kg</td>
           <td>{{ pickup.dimensions }}</td>
-          <td>{{ pickup.address }}</td>
+          <td>
+            {{ pickup.address }}<br>
+            <a href="https://www.google.com/maps/search/?api=1&query={{ pickup.address | urlencode }}" target="_blank">📍 View Map</a>
+          </td>
           <td>{{ pickup.pickup_time }}</td>
           <td>
-  <span class="status">{{ pickup.status }}</span>
-  {% if pickup.status.lower() == 'pending' %}
-  <form action="/mark-collected/{{ pickup.id }}" method="POST" style="margin-top: 6px;">
-    <button type="submit" style="padding: 6px 10px; font-size: 13px; background-color: #2e7d32; color: white; border: none; border-radius: 4px; cursor: pointer;">Mark as Collected</button>
-  </form>
-  {% endif %}
-</td>
-
+            <form action="/mark-collected/{{ pickup.id }}" method="POST">
+              <button type="submit" class="btn">Mark as Collected</button>
+            </form>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
     {% else %}
-      <p class="no-data">No pending pickups found.</p>
+      <p class="no-data">No pending pickups found near you.</p>
     {% endif %}
   </div>
 </body>
+
 </html>
