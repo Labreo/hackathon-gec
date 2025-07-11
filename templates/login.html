@@ -3,22 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <title>Login - EcoConnect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
       font-family: Arial, sans-serif;
       background-color: #e0f2e9;
+    }
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
     }
     .container {
       background-color: #f0fdf0;
       padding: 40px;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 100%;
+      width: 90%;
       max-width: 380px;
     }
     h2 {
@@ -70,6 +76,7 @@
   </style>
 </head>
 <body>
+<<<<<<< Updated upstream
 <div class="container">
   <h2>Welcome back</h2>
 
@@ -87,6 +94,15 @@
   <form method="POST" action="/login">
     <div class="input-field">
       <input type="text" name="username" placeholder="Enter your email or username" required />
+=======
+  <div class="container">
+    <h2>Welcome back</h2>
+    <input type="text" placeholder="Enter your email or username" />
+    <input type="password" placeholder="Enter your password" />
+    <button class="btn">Continue</button>
+    <div class="footer">
+      New here? <a href="signup.html">Create an account</a>
+>>>>>>> Stashed changes
     </div>
 
     <div class="input-field">
