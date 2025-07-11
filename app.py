@@ -11,16 +11,23 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        fullname = request.form['fullname']
+        address = request.form['address']
+        age = request.form['age']
+        sex = request.form['sex']
         username = request.form['username']
-        password = request.form['password']  
-        # Insert into database
+        password = request.form['password']
+
         conn = sqlite3.connect('pickups.db')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+        cursor.execute('''
+            INSERT INTO users (fullname, address, age, sex, username, password)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (fullname, address, age, sex, username, password))
         conn.commit()
         conn.close()
 
-        return redirect('/login')  
+        return redirect('/login')
 
     return render_template('signup.html')
 
