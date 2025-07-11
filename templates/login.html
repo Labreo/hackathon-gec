@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - MyApp</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 380px;
+    }
+    h2 {
+      margin-top: 0;
+      font-weight: 500;
+      color: #202124;
+    }
+    .input-field {
+      margin-top: 20px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f1f3f4;
+      color: #202124;
+      font-size: 14px;
+    }
+    input::placeholder {
+      color: #80868b;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 30px;
+      background-color: #1a73e8;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: 500;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #1669c1;
+    }
+    .existing-user {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 14px;
+    }
+    .existing-user a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    .existing-user a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Create your account</h2>
+
+    <div class="input-field">
+      <label for="username">Username or Email</label>
+      <input type="text" id="username" placeholder="Enter your email or username">
+    </div>
+
+    <div class="input-field">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Create a password">
+    </div>
+
+    <button class="btn">Continue</button>
+
+    <div class="existing-user">
+      Already have an account? <a href="#">Sign in</a>
+    </div>
+  </div>
+</body>
+</html>
