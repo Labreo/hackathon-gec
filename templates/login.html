@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Sign Up - MyApp</title>
+  <meta charset="UTF-8" />
+  <title>Login - MyApp</title>
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
     body {
+      font-family: Arial, sans-serif;
       background-color: #f5f5f5;
       display: flex;
       justify-content: center;
@@ -28,9 +25,6 @@
       margin-top: 0;
       font-weight: 500;
       color: #202124;
-    }
-    .input-field {
-      margin-top: 20px;
     }
     input[type="text"],
     input[type="password"] {
@@ -61,39 +55,33 @@
     .btn:hover {
       background-color: #1669c1;
     }
-    .existing-user {
+    .footer {
       text-align: center;
       margin-top: 25px;
       font-size: 14px;
     }
-    .existing-user a {
+    .footer a {
       color: #1a73e8;
       text-decoration: none;
     }
-    .existing-user a:hover {
+    .footer a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Create your account</h2>
+    <h2>Welcome back</h2>
 
-    <div class="input-field">
-      <label for="username">Username or Email</label>
-      <input type="text" id="username" placeholder="Enter your email or username">
-    </div>
-
-    <div class="input-field">
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Create a password">
-    </div>
+    <input type="text" placeholder="Enter your email or username" />
+    <input type="password" placeholder="Enter your password" />
 
     <button class="btn">Continue</button>
 
-    <div class="existing-user">
-      Already have an account? <a href="#">Sign in</a>
+    <div class="footer">
+      New here? <a href="signup.html">Create an account</a>
     </div>
   </div>
 </body>
 </html>
+
