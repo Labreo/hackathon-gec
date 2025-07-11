@@ -6,6 +6,9 @@ EcoConnect is a Flask-based web application designed during a 24-hour hackathon 
 
 ## 🌐 Features
 
+### Live App URL
+- https://hackathon-gec.onrender.com
+
 ### 👤 User Module
 - ✅ User Signup & Login (with session tracking)
 - 🏠 User Dashboard (`/home`)
