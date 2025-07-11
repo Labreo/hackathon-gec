@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - EcoConnect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      background-color: #e0f2e9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      background-color: #f0fdf0;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 700px;
+    }
+    h2 {
+      margin-top: 0;
+      font-weight: 500;
+      color: #202124;
+      text-align: center;
+    }
+    .input-row {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .input-row label {
+      width: 150px;
+      font-size: 14px;
+      color: #202124;
+    }
+    .input-row input,
+    .input-row select {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f1f3f4;
+      color: #202124;
+      font-size: 14px;
+    }
+    input::placeholder {
+      color: #80868b;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 30px;
+      background-color: #2e7d32;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: 500;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #18681c;
+    }
+    .existing-user {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 14px;
+    }
+    .existing-user a {
+      color: #2e7d32;
+      text-decoration: none;
+    }
+    .existing-user a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .input-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .input-row label {
+        width: 100%;
+        margin-bottom: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Create your account</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message" style="background-color: #ffe0e0; color: #b00020; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/signup">
+      <div class="input-row">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="input-row">
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address" required>
+      </div>
+
+      <div class="input-row">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" placeholder="Enter your age" min="0" required>
+      </div>
+
+      <div class="input-row">
+        <label for="sex">Sex</label>
+        <select id="sex" name="sex" required>
+          <option value="" disabled selected>Select your sex</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="others">Others</option>
+          <option value="prefer_not_to_say">Prefer not to say</option>
+        </select>
+      </div>
+
+      <div class="input-row">
+        <label for="username">Username or Email</label>
+        <input type="text" id="username" name="username" placeholder="Enter your email or username" required>
+      </div>
+
+      <div class="input-row">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a password" required>
+      </div>
+
+      <button class="btn" type="submit">Continue</button>
+    </form>
+
+    <div class="existing-user">
+      Already have an account? <a href="{{ url_for('login') }}">Login</a>
+    </div>
+  </div>
+</body>
+</html>
