@@ -153,8 +153,39 @@ def collector_login():
 
 @app.route('/collector-dashboard')
 def collector_dashboard():
-    # Load pickups and show based on proximity
-    return render_template('collector_dashboard.html')
+    if 'username' not in session:
+        return redirect('/collector-login')
+
+    conn = sqlite3.connect('pickups.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        SELECT id, equipment, weight, dimensions, address, pickup_time, status
+        FROM pickups
+        WHERE status = 'pending'
+        ORDER BY timestamp DESC
+    ''')
+    pickups = cursor.fetchall()
+    conn.close()
+
+    return render_template('collector_dashboard.html', pickups=pickups)
+
+@app.route('/mark-collected/<int:pickup_id>', methods=['POST'])
+def mark_collected(pickup_id):
+    if 'username' not in session:
+        return redirect('/collector-login')
+
+    conn = sqlite3.connect('pickups.db')
+    cursor = conn.cursor()
+
+    # Delete the pickup (you could also update the status if you prefer soft-delete)
+    cursor.execute("UPDATE pickups SET status = 'collected' WHERE id = ?", (pickup_id,))
+    conn.commit()
+    conn.close()
+
+    return redirect('/collector-dashboard')
+
 
 
 @app.route('/collector-signup')
