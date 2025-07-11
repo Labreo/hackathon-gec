@@ -123,9 +123,31 @@ def request_pickup():
     return render_template('request_pickup.html')
 
 
-@app.route('/profile', methods=['GET'])
-def profile():
-    return render_template('profile.html')
+@app.route('/insight')
+def insight():
+    conn = sqlite3.connect('pickups.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    # Total pickups (all users)
+    cursor.execute("SELECT COUNT(*) AS total_pickups FROM pickups")
+    total_pickups = cursor.fetchone()['total_pickups']
+
+    # Total weight recycled (all users)
+    cursor.execute("SELECT SUM(weight) AS total_weight FROM pickups")
+    total_weight = cursor.fetchone()['total_weight'] or 0
+
+    # Total pending pickups (all users)
+    cursor.execute("SELECT COUNT(*) AS pending_pickups FROM pickups WHERE status = 'pending'")
+    pending_pickups = cursor.fetchone()['pending_pickups']
+
+    conn.close()
+
+    return render_template('insight.html',
+                           total_pickups=total_pickups,
+                           total_weight=round(total_weight, 2),
+                           pending_pickups=pending_pickups)
+
 
 @app.route('/success')
 def success():
