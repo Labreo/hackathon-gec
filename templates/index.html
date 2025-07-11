@@ -124,7 +124,6 @@
     <div class="logo">EcoConnect</div>
     <nav>
       <a href="#how-it-works">How It Works</a>
-      <a href="{{ url_for('login') }}">Login</a>
       <a class="btn" href="{{ url_for('signup') }}">Get Started</a>
     </nav>
   </header>
@@ -137,10 +136,10 @@
     <!-- Role Switch Buttons -->
     <div class="role-buttons">
       <form method="get" action="{{ url_for('signup') }}">
-        <button class="btn" type="submit" formaction="{{ url_for('signup', role='user') }}">Sign up as User</button>
+        <button class="btn" type="submit" formaction="{{ url_for('signup', role='user') }}">Continue as User</button>
       </form>
       <form method="get" action="{{ url_for('collector_signup') }}">
-        <button class="btn" type="submit" formaction="{{ url_for('collector_signup', role='collector') }}">Sign up as Collector</button>
+        <button class="btn" type="submit" formaction="{{ url_for('collector_signup', role='collector') }}">Continue as Collector</button>
       </form>
     </div>
   </section>
