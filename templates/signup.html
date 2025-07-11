@@ -99,59 +99,46 @@
 <body>
   <div class="container">
     <h2>Create your account</h2>
-<form method="POST" action="/signup">
-  <div class="input-field">
-    <label for="username">Username or Email</label>
-    <input type="text" id="username" name="username" placeholder="Enter your email or username" required>
-  </div>
+    
+    <form method="POST" action="/signup">
+      <div class="input-row">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+      </div>
 
-<<<<<<< Updated upstream
-  <div class="input-field">
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" placeholder="Create a password" required>
-  </div>
+      <div class="input-row">
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address" required>
+      </div>
 
-  <button class="btn" type="submit">Continue</button>
-</form>
-=======
-    <div class="input-row">
-      <label for="fullname">Full Name</label>
-      <input type="text" id="fullname" placeholder="Enter your full name">
-    </div>
+      <div class="input-row">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" placeholder="Enter your age" min="0" required>
+      </div>
 
-    <div class="input-row">
-      <label for="address">Address</label>
-      <input type="text" id="address" placeholder="Enter your address">
-    </div>
+      <div class="input-row">
+        <label for="sex">Sex</label>
+        <select id="sex" name="sex" required>
+          <option value="" disabled selected>Select your sex</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="others">Others</option>
+          <option value="prefer_not_to_say">Prefer not to say</option>
+        </select>
+      </div>
 
-    <div class="input-row">
-      <label for="age">Age</label>
-      <input type="number" id="age" placeholder="Enter your age" min="0">
-    </div>
+      <div class="input-row">
+        <label for="username">Username or Email</label>
+        <input type="text" id="username" name="username" placeholder="Enter your email or username" required>
+      </div>
 
-    <div class="input-row">
-      <label for="sex">Sex</label>
-      <select id="sex">
-        <option value="" disabled selected>Select your sex</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="others">Others</option>
-        <option value="prefer_not_to_say">Prefer not to say</option>
-      </select>
-    </div>
+      <div class="input-row">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a password" required>
+      </div>
 
-    <div class="input-row">
-      <label for="username">Username or Email</label>
-      <input type="text" id="username" placeholder="Enter your email or username">
-    </div>
-
-    <div class="input-row">
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Create a password">
-    </div>
-
-    <button class="btn">Continue</button>
->>>>>>> Stashed changes
+      <button class="btn" type="submit">Continue</button>
+    </form>
 
     <div class="existing-user">
       Already have an account? <a href="{{ url_for('login') }}">Login</a>
