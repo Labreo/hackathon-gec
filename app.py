@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session,flash
 import sqlite3
 
 app = Flask(__name__)
@@ -27,7 +27,24 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']  
+        conn = sqlite3.connect('pickups.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            session['username'] = username
+            return redirect('/home')
+        else:
+            flash('Invalid username or password')
+            return redirect('/login')
+
     return render_template('login.html')
+
 
 @app.route('/home')
 def home():
