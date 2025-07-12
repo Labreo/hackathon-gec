@@ -24,6 +24,7 @@ EcoConnect is a Flask-based web application designed during a 24-hour hackathon 
 
 ## 🗂️ Project Structure
 
+```
 ├── README.md
 ├── app.py
 ├── init_db.py
@@ -46,6 +47,7 @@ EcoConnect is a Flask-based web application designed during a 24-hour hackathon 
     ├── request_pickup.html
     ├── signup.html
     └── success.html
+```
 
 ---
 
@@ -65,21 +67,26 @@ EcoConnect is a Flask-based web application designed during a 24-hour hackathon 
    git clone https://github.com/yourusername/hackathon-gec.git
    cd hackathon-gec
 
-2. **Create virtual environment & install requirements**
+2. **Create virtual environment & install requirements** 
+   ```bash
    python -m venv venv
    source venv/bin/activate  # or venv\Scripts\activate on Windows
    pip install -r requirements.txt
 
 3. **Initialize the database**
+   ```bash
    python init_db.py
 
 4. **Initialize the database**
+   ```bash
    python init_db.py
 
 5. **Run the app**
+   ```bash
    flask run
 
 6. **Open in browser**
+   ```
    Visit http://localhost:5000
-   
+   ```
  
