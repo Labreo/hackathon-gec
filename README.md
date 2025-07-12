@@ -64,7 +64,7 @@ EcoConnect is a Flask-based web application designed during a 24-hour hackathon 
 
 1. **Clone this repo**
    ```bash
-   git clone https://github.com/yourusername/hackathon-gec.git
+   git clone https://github.com/Labreo/hackathon-gec.git
    cd hackathon-gec
 
 2. **Create virtual environment & install requirements** 
